@@ -33,11 +33,11 @@ const createPost = async(req,res) =>{
         })
 
         await newPost.save();
-        return response(res,201,'Post created successfully', newPost)
+        return response(res,201,'Message créé avec succès', newPost)
 
     } catch (error) {
          console.log('error creating post',error)
-         return response(res,500, 'Internal server error',error.message)
+         return response(res,500, 'Erreur interne du serveur',error.message)
     }
 }
 
@@ -50,7 +50,7 @@ const createStory = async(req,res) =>{
         const file= req.file;
         
         if(!file) {
-            return response(res,400, 'file is required to create a story')
+            return response(res,400, 'Un fichier est nécessaire pour créer une histoire')
         }
         let mediaUrl = null;
         let mediaType = null;
@@ -69,11 +69,11 @@ const createStory = async(req,res) =>{
         })
 
         await newStory.save();
-        return response(res,201,'Story created successfully', newStory)
+        return response(res,201,'Histoire créée avec succès', newStory)
 
     } catch (error) {
          console.log('error creating story',error)
-         return response(res,500, 'Internal server error',error.message)
+         return response(res,500, 'Erreur interne du serveur',error.message)
     }
 }
 
@@ -85,10 +85,10 @@ const getAllStory = async(req, res) => {
         .sort({createdAt: -1})
         .populate('user','_id username profilePicture email')
 
-        return response(res, 201, 'Get all story successfully', story)
+        return response(res, 201, 'Obtenez l\'intégralité de l\'histoire avec succès', story)
     } catch (error) {
-        console.log('error getting story',error)
-        return response(res,500,'Internal server error',error.message)
+        console.log('erreur lors de la récupération de l\'histoire',error)
+        return response(res,500,'Erreur interne du serveur',error.message)
     }
 }
 
@@ -104,10 +104,10 @@ const getAllPosts = async(req, res) => {
             path: 'comments.user',
             select: 'username profilePicture'
         })
-        return response(res, 201, 'Get all posts successfully', posts)
+        return response(res, 201, 'Récupérer tous les messages avec succès', posts)
     } catch (error) {
-        console.log('error getting posts',error)
-        return response(res,500,'Internal server error',error.message)
+        console.log('erreur lors de la récupération des messages',error)
+        return response(res,500,'Erreur interne du serveur',error.message)
     }
 }
 
@@ -118,7 +118,7 @@ const getPostByUserId = async(req, res) => {
     
     try {
         if(!userId){
-            return response(res,400,'UserId is require to get user post')
+            return response(res,400,'L\'identifiant utilisateur est requis pour obtenir le message de l\'utilisateur.')
         }
 
         const posts = await Post.find({user:userId})
@@ -128,10 +128,10 @@ const getPostByUserId = async(req, res) => {
             path: 'comments.user',
             select: 'username, profilePicture'
         })
-        return response(res, 201, 'Get user post successfully', posts)
+        return response(res, 201, 'Récupération réussie du message de l\'utilisateur', posts)
     } catch (error) {
-        console.log('error getting posts',error)
-        return response(res,500,'Internal server error',error.message)
+        console.log('erreur lors de la récupération des messages',error)
+        return response(res,500,'Erreur interne du serveur',error.message)
     }
 }
 
@@ -142,7 +142,7 @@ const likePost = async(req, res) => {
     try {
          const post = await Post.findById(postId)
          if(!post) {
-            return response(res,404,'post not found')
+            return response(res,404,'post non trouver')
          }
          const hasLiked = post.likes.includes(userId)
          if(hasLiked){
@@ -156,10 +156,10 @@ const likePost = async(req, res) => {
 
          //save the like in updated post
          const updatedpost = await post.save()
-         return response(res, 201, hasLiked ? "Post unlike successfully": "post liked successfully", updatedpost )
+         return response(res, 201, hasLiked ? "Publier contrairement à avec succès": "publication aimée avec succès", updatedpost )
     } catch (error) {
         console.log(error)
-        return response(res,500,'Internal server error',error.message)
+        return response(res,500,'Erreur interne du serveur',error.message)
     }
 }
 
@@ -172,7 +172,7 @@ const addCommentToPost = async(req,res) =>{
     try {
          const post = await Post.findById(postId)
          if(!post) {
-            return response(res,404,'post not found')
+            return response(res,404,'post non trouver')
          }
 
 
@@ -181,10 +181,10 @@ const addCommentToPost = async(req,res) =>{
           
          //save the post with new comments
          await post.save()
-         return response(res, 201, "comments added successfully", post )
+         return response(res, 201, "Commentaires ajoutés avec succès", post )
     } catch (error) {
         console.log(error)
-        return response(res,500,'Internal server error',error.message)
+        return response(res,500,'Erreur interne du serveur',error.message)
     }
 }
 
@@ -197,7 +197,7 @@ const sharePost = async(req, res) => {
     try {
          const post = await Post.findById(postId)
          if(!post) {
-            return response(res,404,'post not found')
+            return response(res,404,'post non trouver')
          }
          const hasUserShared = post.share.includes(userId)
          if(!hasUserShared){
@@ -208,10 +208,10 @@ const sharePost = async(req, res) => {
 
          //save the share in updated post
           await post.save()
-         return response(res, 201, 'post share successfully', post )
+         return response(res, 201, 'Partage réussi', post )
     } catch (error) {
         console.log(error)
-        return response(res,500,'Internal server error',error.message)
+        return response(res,500,'Erreur interne du serveur',error.message)
     }
 }
 

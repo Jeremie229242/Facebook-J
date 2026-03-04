@@ -41,11 +41,11 @@ const createOrUpdateUserBio = async(req,res) =>{
             await User.findByIdAndUpdate(userId,{bio: bio._id})
         }
 
-        return response(res,201, 'Bio create or update successfully',bio)
+        return response(res,201, 'Création ou mise à jour réussie de la bio',bio)
 
     } catch (error) {
         console.log(error)
-        return response(res,500,'Internal server error',error.message)
+        return response(res,500,'Erreur interne du serveur',error.message)
     }
 }
 
@@ -62,7 +62,7 @@ const updateCoverPhoto = async(req, res) =>{
          }
 
          if(!coverPhoto){
-            return response(res,400, 'failed to upload cover photo')
+            return response(res,400, 'Impossible de télécharger la photo de couverture')
          }
          //update user profile with cover photo
             await User.updateOne(
@@ -76,12 +76,12 @@ const updateCoverPhoto = async(req, res) =>{
          const updateUser = await User.findById(userId)
 
          if(!updateUser){
-           return response(res,404, 'user not found with this id')
+           return response(res,404, 'Utilisateur introuvable avec cet identifiant')
          }
-         return response(res,200, 'Cover photo update successfully',updateUser)
+         return response(res,200, 'Mise à jour de la photo de couverture réussie',updateUser)
        } catch (error) {
         console.log(error)
-        return response(res,500,'Internal server error',error.message)
+        return response(res,500,'Erreur interne du serveur',error.message)
        }
 }
 
@@ -115,13 +115,13 @@ const updateUserProfile = async(req, res) =>{
       const updateUser = await User.findById(userId)
 
       if(!updateUser){
-        return response(res,404, 'user not found with this id')
+        return response(res,404, 'Utilisateur introuvable avec cet identifiant')
       }
 
-      return response(res,200, 'user profile update successfully',updateUser)
+      return response(res,200, 'Mise à jour du profil utilisateur réussie',updateUser)
     } catch (error) {
      console.log(error)
-     return response(res,500,'Internal server error',error.message)
+     return response(res,500,'Erreur interne du serveur',error.message)
     }
 }
 

@@ -9,7 +9,7 @@ const followUser =  async(req,res) =>{
     const userId = req?.user?.userId;
     //prevent the user to follow itself 
     if(userId === userIdToFollow){
-        return response(res,400,'You are not allowed to follow yourself');
+        return response(res,400,'Vous n\'êtes pas autorisé à vous suivre vous-même');
     }
     try {
         const userToFollow = await User.findById(userIdToFollow)
@@ -17,12 +17,12 @@ const followUser =  async(req,res) =>{
 
         //check both user is exit in database or not
         if(!userToFollow || !currentUser){
-            return response(res,404,'User not found')
+            return response(res,404,'Utilisateur non trouvé')
         }
 
         //check if current user is already following
         if(currentUser.following.includes(userIdToFollow)){
-            return response(res,404, 'User already following this user');
+            return response(res,404, 'Utilisateur déjà abonné à cet utilisateur');
         }
 
         //add user to the current user in following list
@@ -39,10 +39,10 @@ const followUser =  async(req,res) =>{
         await currentUser.save()
         await userToFollow.save()
         
-        return response(res,200,'User followed successfully')
+        return response(res,200,'L\'utilisateur a été suivi avec succès')
 
     } catch (error) {
-        return response(res, 500, 'Internal server error', error.message)
+        return response(res, 500, 'Erreur interne du serveur', error.message)
     }
 }
 
@@ -56,7 +56,7 @@ const unfollowUser =  async(req,res) =>{
 
     //prevent the user to follow itself 
     if(userId === userIdToUnFollow){
-        return response(res,400,'You are not allowed to unfollow yourself');
+        return response(res,400,'Vous n\'avez pas le droit de vous désabonner de vous-même');
     }
     try {
         const userToUnFollow = await User.findById(userIdToUnFollow)
@@ -64,12 +64,12 @@ const unfollowUser =  async(req,res) =>{
 
         //check both user is exit in database or not
         if(!userToUnFollow || !currentUser){
-            return response(res,404,'User not found')
+            return response(res,404,'Utilisateur non trouvé')
         }
 
         //check if current user is already following
         if(!currentUser.following.includes(userIdToUnFollow)){
-            return response(res,404, 'You are not following this user');
+            return response(res,404, 'Vous ne suivez pas cet utilisateur');
         }
 
         //remove the user from the following list and update the follower count
@@ -84,10 +84,10 @@ const unfollowUser =  async(req,res) =>{
         await currentUser.save()
         await userToUnFollow.save()
         
-        return response(res,200,'User unfollowed successfully')
+        return response(res,200,'L\'utilisateur s\'est désabonné avec succès')
 
     } catch (error) {
-        return response(res, 500, 'Internal server error', error.message)
+        return response(res, 500, 'Erreur interne du serveur', error.message)
     }
 }
 
@@ -101,14 +101,14 @@ const deleteUserFromRequest = async (req, res) => {
 
         //check both user is exit in database or not
         if(!requestSender || !loggedInUser){
-            return response(res,404,'User not found')
+            return response(res,404,'Utilisateur non trouvé')
         }
 
         //check if the request sender is following to loggedin user or not
         const isRequestSend = requestSender.following.includes(loggedInUserId)
 
         if(!isRequestSend){
-            return response(res, 404, 'No request found for this user')
+            return response(res, 404, 'Aucune requête trouvée pour cet utilisateur')
         }
 
         //remove the loggedIn userId from the request sender following list
@@ -126,10 +126,10 @@ const deleteUserFromRequest = async (req, res) => {
       await loggedInUser.save()
       await requestSender.save()
 
-      return response(res,200,`Friends request from ${requestSender.username} deleted successfully `)
+      return response(res,200,`Demande d'amis de ${requestSender.username} supprimé avec succès `)
 
     } catch (error) {
-        return response(res, 500, 'Internal server error', error.message)
+        return response(res, 500, 'Erreur interne du serveur', error.message)
     }
 }
 
@@ -143,7 +143,7 @@ const getAllFriendsRequest = async (req, res) => {
 
          const loggedInUser = await User.findById(loggedInUserId).select('followers following')
          if(!loggedInUser){
-            return response(res, 404, 'User not found')
+            return response(res, 404, 'Utilisateur non trouvé')
          }
 
          //find user who follow the logged in user but are not followed back
@@ -154,10 +154,10 @@ const getAllFriendsRequest = async (req, res) => {
             }
           }).select('username profilePicture email followerCount');
 
-          return response(res,200, 'user to follow back get successfully',userToFollowBack)
+          return response(res,200, 'L\'utilisateur suivant en retour a réussi',userToFollowBack)
 
     } catch (error) {
-        return response(res, 500, 'Internal server error', error.message)
+        return response(res, 500, 'Erreur interne du serveur', error.message)
     }
 }
 
@@ -171,7 +171,7 @@ const getAllUserForRequest = async (req, res) => {
 
          const loggedInUser = await User.findById(loggedInUserId).select('followers following')
          if(!loggedInUser){
-            return response(res, 404, 'User not found')
+            return response(res, 404, 'Utilisateur non trouvé')
          }
 
          //find user who  neither followers not following of the login user
@@ -182,10 +182,10 @@ const getAllUserForRequest = async (req, res) => {
             }
           }).select('username profilePicture email followerCount');
 
-          return response(res,200, 'user for frined request get successfully ',userForFriendRequest)
+          return response(res,200, 'L\'utilisateur a reçu avec succès sa demande d\'ami ',userForFriendRequest)
 
     } catch (error) {
-        return response(res, 500, 'Internal server error', error.message)
+        return response(res, 500, 'Erreur interne du serveur', error.message)
     }
 }
 
@@ -201,7 +201,8 @@ const getAllMutualFriends = async (req, res) => {
         .populate('followers','username profilePicture email followerCount followingCount')
 
         if(!loggedInUser){
-           return response(res, 404, 'User not found')
+            
+           return response(res, 404, 'Utilisateur non trouvé')
         }
 
         //create a set of user id that logged in user is following
@@ -212,10 +213,10 @@ const getAllMutualFriends = async (req, res) => {
             followingUserId.has(follower._id.toString())
         )
 
-        return response(res,200, 'Mutual friends get successfully', mutualFriends)
+        return response(res,200, 'Les amis communs réussissent', mutualFriends)
 
    } catch (error) {
-       return response(res, 500, 'Internal server error', error.message)
+       return response(res, 500, 'Erreur interne du serveur', error.message)
    }
 }
 
@@ -224,9 +225,9 @@ const getAllMutualFriends = async (req, res) => {
 const getAllUser = async(req, res) =>{
     try {
         const users = await User.find().select('username profilePicture email followerCount')
-         return response(res,200, 'users get successfully',users)
+         return response(res,200, 'Les utilisateurs réussissent',users)
    } catch (error) {
-       return response(res, 500, 'Internal server error', error.message)
+       return response(res, 500, 'Erreur interne du serveur', error.message)
    }
 }
 
@@ -234,16 +235,16 @@ const getAllUser = async(req, res) =>{
 const checkUserAuth = async(req, res) =>{
      try {
         const userId = req?.user?.userId;
-        if(!userId) return response(res,404, 'unauthenticated ! please login before access the data')
+        if(!userId) return response(res,404, 'Non authentifié ! Veuillez vous connecter avant d\'accéder aux données.')
 
         //fetch the user details and excude sensitive information
         const user = await User.findById(userId).select('-password');
 
-        if(!user) return response(res,403, 'User not found')
+        if(!user) return response(res,403, 'Utilisateur non trouvé')
 
-        return response(res,201, 'user retrived and allow to use facebook', user)
+        return response(res,201, 'L\'utilisateur a été récupéré et autorisé à utiliser Facebook.', user)
      } catch (error) {
-        return response(res, 500, 'Internal server error', error.message)
+        return response(res, 500, 'Erreur interne du serveur', error.message)
      }
 }
 
@@ -256,13 +257,13 @@ const getUserProfile = async(req, res) =>{
         //fetch the user details and excude sensitive information
         const userProfile = await User.findById(userId).select('-password').populate('bio').exec();
 
-        if(!userProfile) return response(res,403, 'User not found')
+        if(!userProfile) return response(res,403, 'Utilisateur non trouvé')
 
         const isOwner = loggedInUserId === userId;
 
-        return response(res,201, 'user profile get successfully', {profile:userProfile,isOwner})
+        return response(res,201, 'Le profil utilisateur a été récupéré avec succès.', {profile:userProfile,isOwner})
      } catch (error) {
-        return response(res, 500, 'Internal server error', error.message)
+        return response(res, 500, 'Erreur interne du serveur', error.message)
      }
 }
 

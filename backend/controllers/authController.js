@@ -12,7 +12,7 @@ const registerUser = async(req,res) =>{
         //  check the existing user with email
         const existingUser = await User.findOne({email});
         if(existingUser){
-            return response(res,400,'User with this email already exists')
+            return response(res,400,'Cet utilisateur existe déjà.')
         }
        
         const hashedPassword = await bcrypt.hash(password,10)
@@ -35,14 +35,14 @@ const registerUser = async(req,res) =>{
         })
 
 
-        return response(res,201,"User created successfully",{
+        return response(res,201,"Utilisateur créé avec succès",{
              username:newUser.username,
              email:newUser.email
         })
 
     } catch (error) {
         console.error(error)
-        return response(res,500,"Internal Server Error",error.message)
+        return response(res,500,"Erreur interne du serveur",error.message)
     }
 }
 
@@ -54,12 +54,12 @@ const loginUser = async(req,res) =>{
         //  check the existing user with email
         const user = await User.findOne({email});
         if(!user){
-            return response(res,404,'User not found with this email')
+            return response(res,404,'Utilisateur introuvable avec cette adresse e-mail')
         }
        
         const matchPassword = await bcrypt.compare(password,user.password)
         if(!matchPassword){
-            return response(res,404,'Invalid Password')
+            return response(res,404,'Mot de passe invalide')
         }
         
         const accessToken = generateToken(user);
@@ -71,14 +71,14 @@ const loginUser = async(req,res) =>{
         })
 
 
-        return response(res,201,"User logged in successfully",{
+        return response(res,201,'L\'utilisateur s\'est connecté avec succès.',{
              username:user.username,
              email:user.email
         })
 
     } catch (error) {
         console.error(error)
-        return response(res,500,"Internal Server Error",error.message)
+        return response(res,500,"Erreur interne du serveur",error.message)
     }
 }
 
@@ -91,10 +91,10 @@ const logout = (req,res) =>{
             secure:true,
             expires: new Date(0)
         })
-        return response(res,200,"User logged out successfully")
+        return response(res,200,"L'utilisateur s'est déconnecté avec succès")
     } catch (error) {
         console.error(error)
-        return response(res,500,"Internal Server Error",error.message)
+        return response(res,500,"Erreur interne du serveur",error.message)
     }
 }
 
