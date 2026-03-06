@@ -55,7 +55,7 @@ const ShowStoryPreview = ({
         </div>
         {isNewStory && (
             <div className="absolute bottom-4 right-2 transform -translate-x-1/2">
-                <Button onClick={onPost} className="bg-blue-500 hover:bg-orange-500 text-white">{isLoading ? "Saving..." : "Share"}</Button>
+                <Button onClick={onPost} className="bg-blue-500 hover:bg-orange-500 text-white">{isLoading ? "Chargement..." : "Partager"}</Button>
                 </div>
         )}
       </div>

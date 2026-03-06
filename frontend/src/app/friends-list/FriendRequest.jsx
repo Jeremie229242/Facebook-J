@@ -33,11 +33,11 @@ const FriendRequest = ({ friend, onAction }) => {
 
         <div className="flex flex-col justify-between">
           <Button className="bg-blue-500 " size="lg" onClick={() => {}}>
-            <UserPlus className="mr-2 h-4 w-4" /> Confirm
+            <UserPlus className="mr-2 h-4 w-4" /> Confirmer
           </Button>
 
           <Button className="mt-2 " size="lg" onClick={() => {}}>
-            <UserMinus className="mr-2 h-4 w-4" /> Delete
+            <UserMinus className="mr-2 h-4 w-4" /> Suprimmer
           </Button>
         </div>
       </motion.div>

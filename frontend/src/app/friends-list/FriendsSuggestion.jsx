@@ -31,7 +31,7 @@ const FriendsSuggestion = ({friend ,onAction}) => {
 
       <div className="flex flex-col justify-between">
         <Button className="bg-blue-500 " size="lg" onClick={() => onAction("confirm",friend?._id)}>
-          <UserPlus className="mr-2 h-4 w-4" /> Add Friend
+          <UserPlus className="mr-2 h-4 w-4" /> Ajouter Amis
         </Button>
       </div>
     </motion.div>

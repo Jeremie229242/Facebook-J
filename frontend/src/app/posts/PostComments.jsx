@@ -6,6 +6,8 @@ import userStore from "@/store/userStore";
 import { Input } from "@/components/ui/input";
 import { comment } from "postcss";
 import { formateDate } from "@/lib/utils";
+import { formatDistanceToNow } from "date-fns";
+import { fr } from "date-fns/locale";
 
 const PostComments = ({ post, onComment, commentInputRef }) => {
   const [showAllComments, setShowAllComments] = useState(false);
@@ -29,7 +31,7 @@ const PostComments = ({ post, onComment, commentInputRef }) => {
   return (
     // comemts section list
     <div className="mt-4">
-      <h3 className="font-semibold mb-2">Comments</h3>
+      <h3 className="font-semibold mb-2">Commentaires</h3>
       <div className="max-h-60 overflow-y-auto pr-2">
         {visibleComments?.map((comment, index) => (
           <div key={index} className="flex items-start space-x-2 mb-2">
@@ -58,9 +60,9 @@ const PostComments = ({ post, onComment, commentInputRef }) => {
                   Like
                 </Button>
                 <Button variant="ghost" size="sm">
-                  Reply
+                  Reponse
                 </Button>
-                <span>{formateDate(comment.createdAt)}</span>
+                <span> {formatDistanceToNow(new Date(comment?.createdAt), { addSuffix: true, locale: fr })}</span>
               </div>
             </div>
           </div>
@@ -72,11 +74,11 @@ const PostComments = ({ post, onComment, commentInputRef }) => {
           >
             {showAllComments ? (
               <>
-                Show Less <ChevronUp className="ml-2 h-4 w-4" />
+                Voir moins <ChevronUp className="ml-2 h-4 w-4" />
               </>
             ) : (
               <>
-                Show All Comments <ChevronDown className="ml-2 h-4 w-4" />
+                Voir les Commentaires <ChevronDown className="ml-2 h-4 w-4" />
               </>
             )}
           </p>
@@ -95,7 +97,7 @@ const PostComments = ({ post, onComment, commentInputRef }) => {
         ref={commentInputRef}
         onChange={(e) => setCommentText(e.target.value)}
         onKeyDown= {(e) => e.key === 'Enter' && handleCommentSubmit()}
-          placeholder="Write a comment..."
+          placeholder="Ecrire un commentaire..."
           className="flex-grow cursor-pointer rounded-full h-12 dark:bg-[rgb(58,59,60)] "
         />
         <Button variant="ghost" size="icon" className="hover:bg-transparent"

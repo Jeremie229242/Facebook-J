@@ -59,10 +59,10 @@ export const usePostStore = create((set) => ({
         posts: [newPost, ...state.posts],
         loading: false,
       }));
-      toast.success("Post created successfully");
+      toast.success("Post créer avec succes");
     } catch (error) {
       set({ error, loading: false });
-      toast.error("failed to create a post");
+      toast.error("erreur lors de creation du post");
     }
   },
 
@@ -75,10 +75,10 @@ export const usePostStore = create((set) => ({
         story: [newStory, ...state.story],
         loading: false,
       }));
-      toast.success("Story created successfully");
+      toast.success("Story créer avec succes");
     } catch (error) {
       set({ error, loading: false });
-      toast.error("failed to create a story");
+      toast.error("erreur lors de creation du story");
     }
   },
 
@@ -104,10 +104,10 @@ export const usePostStore = create((set) => ({
              :post
         ),
        }))
-      toast.success("Comments added successfully");
+      toast.success("Commentaire ajouter avec succes");
     } catch (error) {
       set({ error, loading: false });
-      toast.error("failed to add comments");
+      toast.error("erreur lors de creation de comments");
     }
   },
 
@@ -117,10 +117,10 @@ export const usePostStore = create((set) => ({
     set({ loading: true });
     try {
        await sharePost(postId);
-       toast.success("post share successfully");
+       toast.success("post partager avec successfully");
     } catch (error) {
       set({ error, loading: false });
-      toast.error('failed to share this post')
+      toast.error('erreur lors de partage du post')
     }
   },
 }));

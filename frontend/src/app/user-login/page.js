@@ -27,31 +27,31 @@ const Page = () => {
   const [isLoading,setIsLoading]= useState(true)
 
   const registerSchema = yup.object().shape({
-    username: yup.string().required("Name is required"),
+    username: yup.string().required("Nom utilisateur est obligatoire"),
     email: yup
       .string()
-      .email("Invalid email format")
-      .required("Email is required"),
+      .email("format email Invalide  ")
+      .required("Email est obligatoire"),
     password: yup
       .string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-    dateOfBirth: yup.date().required("Birth date is required"),
+      .min(6, "Mot Passe doit contenir au moins 6 characters")
+      .required("Motde Passe est obligatoire"),
+    dateOfBirth: yup.date().required(" date de naissance est obligatoire"),
     gender: yup
       .string()
-      .oneOf(["male", "female", "other"], "please select a gender")
-      .required("Gender is required"),
+      .oneOf(["male", "female", "other"], "Merci de selectionner un sexe")
+      .required("sexe est obligatoire"),
   });
 
   const loginSchema = yup.object().shape({
     email: yup
       .string()
-      .email("Invalid email format")
-      .required("Email is required"),
+      .email("format email Invalide")
+      .required("Email est obligatoire"),
     password: yup
       .string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+      .min(6, "Mot Passe doit contenir au moins 6 characters")
+      .required("Mot de Passe est obligatoire"),
   });
 
   const {
@@ -79,10 +79,10 @@ const Page = () => {
         if(result.status === 'success'){
           router.push('/')
         }
-        toast.success('User register successfully')
+        toast.success('Utilisateur incrit avec success')
     } catch (error) {
       console.error(error);
-      toast.error('error')
+      toast.error('erreur de connexion')
     }finally{
       setIsLoading(false);
     }
@@ -102,10 +102,10 @@ const Page = () => {
         if(result.status === 'success'){
           router.push('/')
         }
-        toast.success('User login successfully')
+        toast.success('Utilisateur connecter avec success')
     } catch (error) {
       console.error(error);
-      toast.error('invalid email or password')
+      toast.error('erreur de connexion')
     }finally{
       setIsLoading(false);
     }
@@ -128,15 +128,15 @@ const Page = () => {
               <span>Facebook</span>
             </CardTitle>
             <CardDescription className="text-center">
-              Connect with frineds and the world around you on facebook
+            Connectez-vous avec vos amis et le monde qui vous entoure sur Facebook
             </CardDescription>
           </CardHeader>
 
           <CardContent>
             <Tabs defaultValue="login" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login">Login</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                <TabsTrigger value="login">Se Connecter</TabsTrigger>
+                <TabsTrigger value="signup">Inscription</TabsTrigger>
               </TabsList>
 
               <TabsContent value="login">
@@ -149,7 +149,7 @@ const Page = () => {
                         name="email"
                         type="email"
                         {...registerLogin("email")}
-                        placeholder="Enter your email"
+                        placeholder="Entrer votre email"
                         className="col-span-3 dark:border-gray-400"
                       />
                       {errorsLogin.email && (
@@ -159,13 +159,13 @@ const Page = () => {
                       )}
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="loginPassword">Password</Label>
+                      <Label htmlFor="loginPassword">Mot de Passe</Label>
                       <Input
                         id="loginPassword"
                         name="password"
                         type="password"
                         {...registerLogin("password")}
-                        placeholder="Enter your Password"
+                        placeholder="Entrer votre mot de passe"
                         className="col-span-3 dark:border-gray-400"
                       />
                       {errorsLogin.password && (
@@ -175,7 +175,7 @@ const Page = () => {
                       )}
                     </div>
                     <Button className="w-full" type="submit">
-                      <LogIn className="mr-2 w-4 h-4" /> Log in
+                      <LogIn className="mr-2 w-4 h-4" /> Soumettre
                     </Button>
                   </div>
                 </form>
@@ -185,13 +185,13 @@ const Page = () => {
                 <form onSubmit={handleSubmitSignUp(onSubmitRegister)}>
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="signupName">Username</Label>
+                      <Label htmlFor="signupName">Nom Utilisateur</Label>
                       <Input
                         id="signupName"
                         name="username"
                         type="text"
                         {...registerSignUp("username")}
-                        placeholder="Enter your username"
+                        placeholder="Enter votre nom Utilisateur"
                         className="col-span-3 dark:border-gray-400"
                       />
                       {errorsSignUp.username && (
@@ -207,7 +207,7 @@ const Page = () => {
                         name="email"
                         type="email"
                         {...registerSignUp("email")}
-                        placeholder="Enter your email"
+                        placeholder="Entrer votre email"
                         className="col-span-3 dark:border-gray-400"
                       />
                       {errorsSignUp.email && (
@@ -223,7 +223,7 @@ const Page = () => {
                         name="password"
                         type="password"
                         {...registerSignUp("password")}
-                        placeholder="Enter your Password"
+                        placeholder="Entrer votre mot de Passe"
                         className="col-span-3 dark:border-gray-400"
                       />
                       {errorsSignUp.password && (
@@ -234,13 +234,13 @@ const Page = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="signupBirthday">Birthdate</Label>
+                      <Label htmlFor="signupBirthday">Date de naissance</Label>
                       <Input
                         id="signupBirthday"
                         name="dateOfBirth"
                         type="date"
                         {...registerSignUp("dateOfBirth")}
-                        placeholder="Enter your Password"
+                        
                         className="col-span-3 dark:border-gray-400"
                       />
                       {errorsSignUp.dateOfBirth && (
@@ -250,7 +250,7 @@ const Page = () => {
                       )}
                     </div>
                     <div className="space-y-2">
-                      <Label>Gender</Label>
+                      <Label>Sexe</Label>
                       <RadioGroup
                         className="flex justify-between "
                         defaultValue="male"
@@ -258,15 +258,15 @@ const Page = () => {
                       >
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="male" id="male" />
-                          <Label htmlFor="male">Male</Label>
+                          <Label htmlFor="male">Masculin</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="female" id="female" />
-                          <Label htmlFor="female">Female</Label>
+                          <Label htmlFor="female">Feminin</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="other" id="other" />
-                          <Label htmlFor="other">Other</Label>
+                          <Label htmlFor="other">Autres</Label>
                         </div>
                       </RadioGroup>
                       {errorsSignUp.gender && (
@@ -277,7 +277,7 @@ const Page = () => {
                     </div>
 
                     <Button className="w-full" type="submit">
-                      <LogIn className="mr-2 w-4 h-4" /> Sign Up
+                      <LogIn className="mr-2 w-4 h-4" /> Soumettre
                     </Button>
                   </div>
                 </form>
@@ -294,7 +294,7 @@ const Page = () => {
                    
                  </div>
                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className=" px-2 text-muted-foreground">Or continue with</span>
+                    <span className=" px-2 text-muted-foreground">Ou continuer avec</span>
                  </div>
             </div>
             <div className="w-full gap-4">

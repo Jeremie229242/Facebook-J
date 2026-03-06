@@ -66,7 +66,7 @@ export const userFriendStore = create((set,get) => ({
     set({loading:true})
     try {
         await deleteUserFromRequest(userId)
-        toast.success("you have deleted friend successfully")
+        toast.success("vous avez supprimé un ami avec succès")
     } catch (error) {
       set({error, loading:false})
     }

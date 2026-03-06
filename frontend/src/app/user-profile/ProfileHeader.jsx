@@ -126,7 +126,7 @@ const ProfileHeader = ({
             onClick={() => setIsEditCoverModel(true)}
           >
             <Camera className=" mr-0 md:mr-2 h-4 w-4" />
-            <span className="hidden md:block">Edit Cover Photo</span>
+            <span className="hidden md:block">Modifier Photo couverture</span>
           </Button>
         )}
       </div>
@@ -148,7 +148,7 @@ const ProfileHeader = ({
           <div className="mt-4 mdLmt-0 text-center md:text-left flex-grow">
             <h1 className="text-3xl font-bold">{profileData?.username}</h1>
             <p className="text-gray-400 font-semibold">
-              {profileData?.followerCount} friends
+              {profileData?.followerCount} Amis
             </p>
           </div>
           {isOwner && (
@@ -157,7 +157,7 @@ const ProfileHeader = ({
               onClick={() => setIsEditProfileModel(true)}
             >
               <PenLine className="w-4 h-4 mr-2" />
-              Edit Profile
+              Modifier Profile
             </Button>
           )}
         </div>
@@ -180,7 +180,7 @@ const ProfileHeader = ({
             >
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Edit Profile
+                  Modifier Profile
                 </h2>
                 <Button
                   variant="ghost"
@@ -207,28 +207,28 @@ const ProfileHeader = ({
                   <input type="file" accept="image/*" className="hidden" ref={profileImageInputRef}  onChange={handleProfilePictureChange}/>
                   <Button type="button" variant="outline" size="sm" onClick={() => profileImageInputRef.current?.click()}>
                     <Upload className="h-4 w-4 mr-2" />
-                    Change Profile Picture
+                    Changer Photo de Profile 
                   </Button>
                 </div>
                 <div>
-                  <Label htmlFor="username">Username</Label>
+                  <Label htmlFor="username">Nom Utilisateur</Label>
                   <Input id="username"  {...register("username")}/>
                 </div>
                 <div>
-                  <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                  <Label htmlFor="dateOfBirth">Date de naissance</Label>
                   <Input id="dateOfBirth" type="date"  {...register("dateOfBirth")}/>
                 </div>
 
                 <div>
-                  <Label htmlFor="gender">Gender</Label>
+                  <Label htmlFor="gender">Sexe</Label>
                   <Select onValueChange={(value) => setValue("gender", value)} defaultValue={profileData?.gender}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select gender" />
+                      <SelectValue placeholder="Selectionner sexe" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="male">Masculin</SelectItem>
+                      <SelectItem value="female">Feminin</SelectItem>
+                      <SelectItem value="other">autre</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -236,7 +236,7 @@ const ProfileHeader = ({
                   type="submit"
                   className="w-full bg-blue-600 hover:bg-blue-400 text-white"
                 >
-                  <Save className="w-4 h-4 mr-2" /> {loading ? "Saving...": "Save changes"}
+                  <Save className="w-4 h-4 mr-2" /> {loading ? "Chargement...": "Sauvegarder"}
                 </Button>
               </form>
             </motion.div>
@@ -261,7 +261,7 @@ const ProfileHeader = ({
             >
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Edit Cover Photo
+                  Modifier Photo de couverture
                 </h2>
                 <Button
                   variant="ghost"
@@ -283,7 +283,7 @@ const ProfileHeader = ({
                   <input type="file" accept="image/*" className="hidden" ref={coverImageInputRef}  onChange={handleCoverPhotoChange}/>
                   <Button type="button" variant="outline" size="sm" onClick={() => coverImageInputRef.current?.click()}>
                     <Upload className="h-4 w-4 mr-2" />
-                    Select New Cover Photo
+                    Select Nouveau Photo de couverture
                   </Button>
                 </div>
 
@@ -293,7 +293,7 @@ const ProfileHeader = ({
                   disabled = {!coverPhotoFile}
                   type="button"
                 >
-                  <Save className="w-4 h-4 mr-2" /> {loading ? "Saving..." :"Save Cover Photo"}
+                  <Save className="w-4 h-4 mr-2" /> {loading ? "Chargement..." :"Sauvegarder"}
                 </Button>
               </form>
             </motion.div>

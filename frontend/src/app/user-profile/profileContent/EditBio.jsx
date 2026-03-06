@@ -41,7 +41,7 @@ const EditBio = ({isOpen,onClose,initialData,id,fetchProfile}) => {
                </div>
 
                <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor="liveIn" className="text-right">Live In</Label>
+                <Label htmlFor="liveIn" className="text-right">Domicile</Label>
                 <Input
                  id='liveIn'
                  className="col-span-3"
@@ -59,7 +59,7 @@ const EditBio = ({isOpen,onClose,initialData,id,fetchProfile}) => {
                </div>
 
                <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor="workPlace" className="text-right">Work Place</Label>
+                <Label htmlFor="workPlace" className="text-right">Lieu de Travail</Label>
                 <Input
                  id='workplace'
                  {...register("workplace")}
@@ -80,7 +80,7 @@ const EditBio = ({isOpen,onClose,initialData,id,fetchProfile}) => {
 
 
                <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor="phone" className="text-right">Phone</Label>
+                <Label htmlFor="phone" className="text-right">TelePhone</Label>
                 <Input
                  id='phone'
                  {...register("phone")}
@@ -91,7 +91,7 @@ const EditBio = ({isOpen,onClose,initialData,id,fetchProfile}) => {
 
 
                <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor="hometown" className="text-right">Hometown</Label>
+                <Label htmlFor="hometown" className="text-right">Diplome</Label>
                 <Input
                  id='hometown'
                  {...register("hometown")}
@@ -102,7 +102,7 @@ const EditBio = ({isOpen,onClose,initialData,id,fetchProfile}) => {
              </div>
              <DialogFooter>
              <Button type="submit" disabled={isSubmitting} >
-              <Save className="w-4 h-4 mr-2"/>  {isSubmitting ? "Saving..." : "save chnages"}
+              <Save className="w-4 h-4 mr-2"/>  {isSubmitting ? "Chargement..." : "sauvegarder"}
                 </Button>
              </DialogFooter>
            </form>

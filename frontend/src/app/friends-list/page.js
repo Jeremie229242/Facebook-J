@@ -18,7 +18,7 @@ const Page = () => {
    
    const handleAction = async(action,userId) =>{
     if(action === "confirm"){
-       toast.success("friend added successfully")
+       toast.success("Amis ajouter avec succes")
         await followUser(userId);
         fetchFriendRequest()
         fetchFriendSuggestion()
@@ -34,28 +34,28 @@ const Page = () => {
     <div className="min-h-screen bg-gray-100 dark:bg-[rgb(36,37,38)] ">
       <LeftSideBar />
       <main className="ml-0 md:ml-64 mt-16 p-6">
-        <h1 className="text-2xl font-bold mb-6">Friends Requests</h1>
+        <h1 className="text-2xl font-bold mb-6">demande d'amis</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6  ">
           {loading ? (
             <FriendCardSkeleton />
           ) : friendRequest.length === 0 ? (
             <NoFriendsMessage
-              text="No Friend Requests"
-              description="Looks like you are all caught up! Why not explore and connect with new people?"
+              text="Aucune demande d'ami"
+              description="On dirait que vous êtes tous rattrapés ! Pourquoi ne pas explorer et entrer en contact avec de nouvelles personnes?"
             />
           ) : (
             friendRequest.map((friend) => <FriendRequest key={friend._id}  friend={friend} loading={loading} onAction={handleAction}  />)
           )}
         </div>
 
-        <h1 className="text-2xl font-bold mb-6">People you may know</h1>
+        <h1 className="text-2xl font-bold mb-6">Les gens que vous connaissez peut-être</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6  ">
           {loading ? (
             <FriendCardSkeleton />
           ) : friendSuggestion.length === 0 ? (
             <NoFriendsMessage
-              text="No Friend Suggestion"
-              description="Looks like you are all caught up! Why not explore and connect with new people?"
+              text="Aucune suggestion d'ami"
+              description="On dirait que vous êtes tous rattrapés ! Pourquoi ne pas explorer et entrer en contact avec de nouvelles personnes?"
             />
           ) : (
             friendSuggestion.map((friend) => (

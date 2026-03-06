@@ -32,7 +32,7 @@ const VideoComments = ({comments}) => {
                   </div>
                   <div className='flex items-center mt-1 text-xs text-gray-400'>
                     <Button variant="ghost" size="sm">Like</Button>
-                    <Button variant="ghost" size="sm">Reply</Button>
+                    <Button variant="ghost" size="sm">Repondre</Button>
                     <span>{formateDate( comment.createdAt)}</span>
                   </div>
             </div>

@@ -1,7 +1,18 @@
 const express = require('express');
 const authMiddleware = require('../middleware/authMiddleware');
-const { followUser, unfollowUser, deleteUserFromRequest, getAllFriendsRequest, getAllUserForRequest, getAllMutualFriends, getAllUser, getUserProfile, checkUserAuth } = require('../controllers/userController');
-const { createOrUpdateUserBio, updateUserProfile, updateCoverPhoto } = require('../controllers/createOrUpdateController');
+const { followUser,
+     unfollowUser, 
+     deleteUserFromRequest, 
+     getAllFriendsRequest, 
+     getAllUserForRequest, 
+     getAllMutualFriends, 
+     getAllUser, 
+     getUserProfile, 
+     checkUserAuth
+     } = require('../controllers/userController');
+const { createOrUpdateUserBio, 
+    updateUserProfile, 
+    updateCoverPhoto } = require('../controllers/createOrUpdateController');
 const { multerMiddleware } = require('../config/cloudinary');
 const router = express.Router();
 

@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dialog";
 import PostComments from "./PostComments";
 import { formateDate } from "@/lib/utils";
+import { formatDistanceToNow } from "date-fns";
+import { fr } from "date-fns/locale";
 
 const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
@@ -32,32 +34,39 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
     .map((name) => name[0])
     .join("");
 
-  const generateSharedLink = () => {
-    return `http://localhost:3000/${post?.id}`;
-  };
-  const handleShare = (platform) => {
-    const url = generateSharedLink();
-    let shareUrl;
-    switch (platform) {
-      case "facebook":
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=}`;
-        break;
-      case "twitter":
-        shareUrl = `https://twitter.com/intent/tweet?url=}`;
-        break;
-      case "linkedin":
-        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=}`;
-        break;
-      case "copy":
-        navigator.clipboard.writeText(url);
-        setIsShareDialogOpen(false);
-        return;
-      default:
-        return;
-    }
-    window.open(shareUrl, "_blank");
-    setIsShareDialogOpen(false);
-  };
+    const generateSharedLink = () => {
+      return `http://localhost:3000/${post?.id}`;
+    };
+    
+    const handleShare = (platform) => {
+      const url = generateSharedLink();
+      let shareUrl;
+    
+      switch (platform) {
+        case "facebook":
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+          break;
+    
+        case "twitter":
+          shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+          break;
+    
+        case "linkedin":
+          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+          break;
+    
+        case "copy":
+          navigator.clipboard.writeText(url);
+          setIsShareDialogOpen(false);
+          return;
+    
+        default:
+          return;
+      }
+    
+      window.open(shareUrl, "_blank", "width=600,height=400");
+      setIsShareDialogOpen(false);
+    };
   return (
     <motion.div
       key={post?._id}
@@ -90,7 +99,8 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
                   {post?.user?.username}
                 </p>
                 <p className="font-sm text-gray-500">
-                  {formateDate(post?.createdAt)}
+                  
+                  {formatDistanceToNow(new Date(post?.createdAt), { addSuffix: true, locale: fr })}
                 </p>
               </div>
             </div>
@@ -109,7 +119,7 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
           {post?.mediaUrl && post.mediaType === "video" && (
             <video controls className="w-full h-[500px] rounded-lg mb-4">
               <source src={post?.mediaUrl} type="video/mp4" />
-              Your browser does not support the video tag
+              Votre navigateur ne prend pas en charge la balise vidéo
             </video>
           )}
           <div className="flex justify-between items-center mb-4">
@@ -121,10 +131,10 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
                 className="text-sm text-gray-500 dark:text-gray-400 hover:border-b-2 border-gray-400 cursor-pointer "
               onClick={() => setShowComments(!showComments)}
               >
-                    {post?.commentCount} comments
+                    {post?.commentCount} commentaires
               </span>
               <span className="text-sm text-gray-500 dark:text-gray-400 hover:border-b-2 border-gray-400 cursor-pointer ">
-              {post?.shareCount} share
+              {post?.shareCount} Partages
               </span>
             </div>
           </div>
@@ -142,7 +152,7 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
               className={`flex-1 dark:hover:bg-gray-600 `}
               onClick={handleCommentClick}
             >
-              <MessageCircle className="mr-2 h-4 w-4" /> Comment
+              <MessageCircle className="mr-2 h-4 w-4" /> Commentaire
             </Button>
             <Dialog
               open={isShareDialogOpen}
@@ -155,27 +165,27 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
                 onClick={onShare}
                 >
                   <Share2 className="mr-2 h-4 w-4" />
-                  share
+                  partager
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Share This Post</DialogTitle>
                   <DialogDescription>
-                    Choose how you want to share this post
+                  Choisissez comment vous souhaitez partager cette publication
                   </DialogDescription>
                 </DialogHeader>
                 <div className="flex flex-col space-y-4 ">
                   <Button onClick={() => handleShare("facebook")}>
-                    Share on Facebook
+                    Partager sur Facebook
                   </Button>
                   <Button onClick={() => handleShare("twitter")}>
-                    Share on Twitter
+                    Partager sur Twitter
                   </Button>
                   <Button onClick={() => handleShare("linkedin")}>
-                    Share on Linkedin
+                    Partager sur Linkedin
                   </Button>
-                  <Button onClick={() => handleShare("copy")}>Copy Link</Button>
+                  <Button onClick={() => handleShare("copy")}>Copier le lien</Button>
                 </div>
               </DialogContent>
             </Dialog>

@@ -19,11 +19,14 @@ import dynamic from "next/dynamic";
 import userStore from "@/store/userStore";
 import { usePostStore } from "@/store/usePostStore";
 
+
+
 const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
 const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const { user } = userStore();
+  
   const [postContent, setPostContent] = useState("");
   const [filePreview, setFilePreview] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -50,8 +53,9 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
   };
 
   const handlePost = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
+      
       const formData = new FormData();
       formData.append("content", postContent);
       if (selectedFile) {
@@ -66,6 +70,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
     } catch (error) {
       console.error(error);
       setLoading(false);
+      
     }
   };
   return (
@@ -75,7 +80,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
           <Avatar>
             {user?.profilePicture ? (
               <AvatarImage src={user?.profilePicture} alt={user?.username} />
-            ) : (
+            ) : ( 
               <AvatarFallback className="dark:bg-gray-400">
                 {userPlaceholder}
               </AvatarFallback>
@@ -85,7 +90,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
           <Dialog open={isPostFormOpen} onOpenChange={setIsPostFormOpen}>
             <DialogTrigger className="w-full">
               <Input
-                placeholder={`what's on your mind, ${user?.username}`}
+                placeholder={`Qu'est-ce qui préoccupe votre esprit, ${user?.username}`}
                 readOnly
                 className="cursor-pointer rounded-full h-12  dark:bg-[rgb(58,59,60)] placeholder:text-gray-500 dark:placeholder:text-gray-400  "
               />
@@ -116,7 +121,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[525px] max-h-[80vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle className="text-center">Create Post</DialogTitle>
+                <DialogTitle className="text-center">Créer Post</DialogTitle>
               </DialogHeader>
               <Separator />
               <div className="flex items-center space-x-3 py-4">
@@ -135,7 +140,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
                 </div>
               </div>
               <Textarea
-                placeholder={`what's on your mind? ${user?.username}`}
+                placeholder={`Qu'est-ce qui préoccupe votre esprit? ${user?.username}`}
                 className="min-h-[100px] text-lg"
                 value={postContent}
                 onChange={(e) => setPostContent(e.target.value)}
@@ -156,7 +161,9 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
                         setShowImageUpload(false);
                         setSelectedFile(null);
                         setFilePreview(null);
+                        
                       }}
+                      
                     >
                       <X className="h-4 w-4" />
                     </Button>
@@ -173,7 +180,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
                       <>
                         <Plus className="h-12 w-12 text-gray-400 mb-2 cursor-pointer "  onClick={() => fileInputRef.current.click()}/>
                         <p className="text-center  text-gray-500 ">
-                          Add Photos/Videos
+                          Ajouter Photos/Videos
                         </p>
                       </>
                     )}
@@ -190,7 +197,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
               </AnimatePresence>
 
               <div className="bg-gray-200 dark:bg-muted p-4 rounded-lg mt-4 ">
-                <p className="font-semibold mb-2">Add Your Post</p>
+                <p className="font-semibold mb-2">Ajouter a votre Post</p>
 
                 <div className="flex space-x-2 ">
                   <Button variant="outline" size="icon" 
@@ -233,13 +240,15 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
                 </motion.div>
               )}
               <div className="flex justify-end mt-4">
-                <Button className="bg-blue-500 text-white"
-                 onClick={handlePost}
+              
+  <Button
+    className="bg-blue-500 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+    onClick={handlePost}
+    disabled={!postContent }
+  >
+    {loading ? 'Sauvegarder...' : 'Post'}
+  </Button>
 
-                >
-
-                  {loading ? 'Saving...' : 'Post'}
-                </Button>
               </div>
             </DialogContent>
           </Dialog>

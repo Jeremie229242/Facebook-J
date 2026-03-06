@@ -15,8 +15,8 @@ const ProfileTabs = ({  id,
     <Tabs defaultValue='posts' className='w-full' onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="posts">Posts</TabsTrigger>
-            <TabsTrigger value="about">About</TabsTrigger>
-            <TabsTrigger value="friends">Friends</TabsTrigger>
+            <TabsTrigger value="about">A propos</TabsTrigger>
+            <TabsTrigger value="friends">Amis</TabsTrigger>
             <TabsTrigger value="photos">Photos</TabsTrigger>
         </TabsList>
         <div className='mt-6'>

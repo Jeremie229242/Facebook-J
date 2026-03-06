@@ -107,7 +107,7 @@ const StoryCard = ({ isAddStory, story }) => {
                 >
                   <Plus className="h-5 w-5 text-white" />
                 </Button>
-                <p className="text-xs font-semibold mt-1">Create Story</p>
+                <p className="text-xs font-semibold mt-1">Créer Story</p>
               </div>
               <input type="file" accept="image/*,video/*" className="hidden"
                ref={fileInputRef}

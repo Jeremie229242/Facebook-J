@@ -63,10 +63,10 @@ const Header = () => {
         router.push("/user-login");
         clearUser();
       }
-      toast.success("user logged out successfully");
+      toast.success("Utilisateur deconnecter avec succes");
     } catch (error) {
       console.log(error);
-      toast.error("failed to log out");
+      toast.error("erreur de deconnexion");
     }
   };
 
@@ -153,7 +153,7 @@ const Header = () => {
                 <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 " />
                 <Input
                   className="pl-8 w-40 md:w-64 h-10 bg-gray-100 dark:bg-[rgb(58,59,60)] rounded-full"
-                  placeholder="search facebook.."
+                  placeholder="Recherche facebook.."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchOpen(true)}
@@ -187,7 +187,7 @@ const Header = () => {
                       ))
                     ):(
                       <>
-                       <div className="p-2 text-gray-500">No user Found</div>
+                       <div className="p-2 text-gray-500">Utilisateur non trouver</div>
                       </>
                     )}
 
@@ -314,7 +314,7 @@ const Header = () => {
                 className="cursor-pointer"
                 onClick={handleLogout}
               >
-                <LogOut /> <span className="ml-2">Logout</span>
+                <LogOut /> <span className="ml-2">Se deconnecter</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

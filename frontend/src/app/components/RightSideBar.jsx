@@ -25,7 +25,7 @@ const RightSideBar = () => {
         {
           name: "Spotify",
           description: "Stream your favorite music anytime, anywhere.",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShpvQJUXehm_yT1kr2WSATHaDRF88_JjWHcQ&s",
+          image: "https://i.insider.com/5da09ab8cc4a0a367570d1a3?width=700",
           website: "https://www.spotify.com",
         },
         {

@@ -75,21 +75,21 @@ const LeftSideBar = () => {
             className="full justify-start"
             onClick={() => handleNavigation("/")}
           >
-            <Home className="mr-4" /> Home
+            <Home className="mr-4" /> Acceuil
           </Button>
           <Button
             variant="ghost"
             className="full justify-start"
             onClick={() => handleNavigation("/friends-list")}
           >
-            <Users className="mr-4" /> Friends
+            <Users className="mr-4" /> Mes Amis
           </Button>
           <Button
             variant="ghost"
             className="full justify-start"
             onClick={() => handleNavigation("/video-feed")}
           >
-            <Video className="mr-4" /> Video
+            <Video className="mr-4" /> Videos
           </Button>
           <Button
             variant="ghost"
@@ -103,7 +103,7 @@ const LeftSideBar = () => {
           </Button>
 
           <Button variant="ghost" className="full justify-start">
-            <Bell className="mr-4" /> Notification
+            <Bell className="mr-4" /> Notifications
           </Button>
         </nav>
 
@@ -126,10 +126,10 @@ const LeftSideBar = () => {
 
           <div className="text-xs text-muted-foreground space-y-1">
           <Button variant="ghost" className="cursor-pointer -ml-4 " onClick={handleLogout} >
-            <LogOut /> <span className="ml-2 font-bold text-md">Logout</span>
+            <LogOut /> <span className="ml-2 font-bold text-md">Se deconnecter</span>
           </Button>
-            <p>Privacy · Terms · Advertising ·</p>
-            <p>· Meta © 2024</p>
+            <p>Privacy · Terms . Confidentialité</p>
+            <p>· Meta © {new Date().getFullYear()}</p>
           </div>
         </div>
       </div>

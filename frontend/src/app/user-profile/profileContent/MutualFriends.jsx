@@ -36,7 +36,7 @@ const MutualFriends = ({ id, isOwner }) => {
       <Card>
         <CardContent className="p-6">
           <h2 className="text-xl font-semibold mb-4 dark:text-gray-300">
-            Mutual Friends
+            Amis en communs
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {mutualFriends?.map((friend) => (
@@ -81,7 +81,7 @@ const MutualFriends = ({ id, isOwner }) => {
                       }}
                     >
                       <DropdownMenuItem>
-                        <UserX className="h-4 w-4 mr-2" /> Unfollow
+                        <UserX className="h-4 w-4 mr-2" /> Désabbonné
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   )}

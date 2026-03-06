@@ -1,7 +1,15 @@
 const express = require('express');
 const authMiddleware = require('../middleware/authMiddleware');
 const { multerMiddleware } = require('../config/cloudinary');
-const { createPost, getAllPosts, getPostByUserId, likePost, sharePost, addCommentToPost, getAllStory, createStory } = require('../controllers/postController');
+const { 
+    createPost,
+     getAllPosts, 
+     getPostByUserId, 
+     likePost, 
+     sharePost, 
+     addCommentToPost, 
+     getAllStory, 
+     createStory } = require('../controllers/postController');
 const router = express.Router();
 
 

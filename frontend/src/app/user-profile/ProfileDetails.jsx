@@ -18,6 +18,8 @@ import MutualFriends from "./profileContent/MutualFriends";
 import EditBio from "./profileContent/EditBio";
 import { usePostStore } from "@/store/usePostStore";
 import { formatDateInDDMMYYY } from "@/lib/utils";
+import { formatDistanceToNow } from "date-fns";
+import { fr } from "date-fns/locale";
 
 const ProfileDetails = ({
   activeTab,
@@ -99,7 +101,7 @@ const ProfileDetails = ({
           <Card>
             <CardContent className="p-6">
               <h2 className="text-xl font-semibold mb-4 dark:text-gray-300">
-                Intro
+                Infos
               </h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 {profileData?.bio?.bioText}
@@ -128,14 +130,14 @@ const ProfileDetails = ({
               </div>
               <div className="flex items-center mb-4 dark:text-gray-300">
                 <Rss className="w-5 h-5 mr-2" />
-                <span>Followed by {profileData?.followingCount} people</span>
+                <span>Suivis par {profileData?.followingCount} personnes</span>
               </div>
               {isOwner && (
                 <Button
                   className="w-full "
                   onClick={() => setIsEditBioModel(true)}
                 >
-                  Edit Bio
+                 Modifier Bio
                 </Button>
               )}
             </CardContent>
@@ -153,7 +155,7 @@ const ProfileDetails = ({
         <Card>
           <CardContent className="p-6">
             <h2 className="text-xl font-semibold mb-4 dark:text-gray-300">
-              About{" "} {profileData?.username}
+              Apropos{" "} {profileData?.username}
             </h2>
             <div className="space-y-4 dark:text-gray-300">
               <div className="flex items-center">
@@ -186,7 +188,7 @@ const ProfileDetails = ({
               </div>
               <div className="flex items-center">
                 <Cake className="w-5 h-5 mr-2" />
-                <span>Birthday: {formatDateInDDMMYYY( profileData?.dateOfBirth)}</span>
+                <span>Date naissance: {formatDateInDDMMYYY( profileData?.dateOfBirth)}</span>
               </div>
             </div>
           </CardContent>
