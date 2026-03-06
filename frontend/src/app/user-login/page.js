@@ -82,7 +82,7 @@ const Page = () => {
         toast.success('User register successfully')
     } catch (error) {
       console.error(error);
-      toast.error('email already exist')
+      toast.error('error')
     }finally{
       setIsLoading(false);
     }
