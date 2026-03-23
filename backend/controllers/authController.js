@@ -31,7 +31,8 @@ const registerUser = async(req,res) =>{
         res.cookie("auth_token",accessToken,{
             httpOnly: true,
             sameSite:"none",
-            secure:true
+            secure:true,
+           path: "/",
         })
 
 
@@ -67,7 +68,8 @@ const loginUser = async(req,res) =>{
         res.cookie("auth_token",accessToken,{
             httpOnly: true,
             sameSite:"none",
-            secure:true
+            secure:true,
+            path: "/",
         })
 
 
@@ -89,6 +91,7 @@ const logout = (req,res) =>{
             httpOnly: true,
             sameSite:"none",
             secure:true,
+            path: "/",
             expires: new Date(0)
         })
         return response(res,200,"L'utilisateur s'est déconnecté avec succès")

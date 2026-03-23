@@ -35,7 +35,7 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
     .join("");
 
     const generateSharedLink = () => {
-      return `https://facebook-j.vercel.app/${post?.id}`;
+      return `http://localhost:3000/${post?.id}`;
     };
     
     const handleShare = (platform) => {

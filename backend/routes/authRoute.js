@@ -24,7 +24,8 @@ router.get('/google/callback', passport.authenticate('google', {failureRedirect:
     res.cookie("auth_token",accessToken,{
         httpOnly: true,
         sameSite:"none",
-        secure:true
+        secure:true,
+        path: "/",
     })
    res.redirect(`${process.env.FRONTEND_URL}`)
  }

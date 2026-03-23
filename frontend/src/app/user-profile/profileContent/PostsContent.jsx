@@ -26,7 +26,7 @@ const PostsContent = ({post,isLiked,onShare,onComment,onLike}) => {
      }
 
     const generateSharedLink = () =>{
-        return `https://facebook-j.vercel.app/${post?.id}`
+        return `http://localhost:3000/${post?.id}`
     }
     const handleShare = (platform) => {
       const url = generateSharedLink();
